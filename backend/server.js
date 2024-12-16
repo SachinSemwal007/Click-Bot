@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 
 
 // Routes
-const puppeteer = require("puppeteer");
 
 app.post("/api/click", async (req, res) => {
     const { url, selector } = req.body;
