@@ -16,6 +16,7 @@ const ButtonClicker = () => {
             setMessage(response.data.message); // Show success message
         } catch (error) {
             // Show error message from backend or fallback error
+            console.error("Error from backend:", error.response?.data || error.message);
             setMessage(error.response?.data?.message || "Something went wrong!");
         }
     };
