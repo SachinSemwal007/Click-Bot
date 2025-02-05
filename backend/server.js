@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const puppeteer = require("puppeteer");
 require("dotenv").config();
 
+
 const connectDB = require("./db");
 const app = express();
 
@@ -13,15 +14,14 @@ app.use(bodyParser.json());
 
 
 // Routes
-
 app.post("/api/click", async (req, res) => {
     const { url, selector } = req.body;
 
     console.log("Received URL:", url);
     console.log("Received Selector:", selector);
 
-    if (!url || !selector) {
-        return res.status(400).json({ message: "URL and Selector are required" });
+    if (!url || !selector ) {
+        return res.status(400).json({ message: "Invalid URL or Selector is missing" });
     }
 
     try {
@@ -31,7 +31,14 @@ app.post("/api/click", async (req, res) => {
 
         // Navigate to the given URL
         console.log("Navigating to:", url);
-        await page.goto(url, { waitUntil: "networkidle2" });
+        await page.goto(url, { 
+            waitUntil: "networkidle2",
+            timeout: 120000 // 2 minutes
+        });
+
+         // Fill in the login form
+        // await page.type('input[name="username"]', process.env.LOGIN_USERNAME);
+        // await page.type('input[name="password"]', process.env.LOGIN_PASSWORD);
 
         // Wait for the button to appear
         console.log("Waiting for selector:", selector);
@@ -53,7 +60,7 @@ app.post("/api/click", async (req, res) => {
     } catch (error) {
         console.error("Error in Puppeteer:", error);
         res.status(500).json({ message: "Internal Server Error" , error: error.message });
-    }
+    } 
 });
 
 

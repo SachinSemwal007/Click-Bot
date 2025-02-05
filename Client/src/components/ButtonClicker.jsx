@@ -50,7 +50,7 @@ const ButtonClicker = () => {
             >
                 Start Clicking
             </button>
-            {message && <p style={{ marginTop: "20px", color: "#ff0000" }}>{message}</p>}
+            {message && <p style={{ marginTop: "20px", color: "#00FF00" }}>{message}</p>}
         </div>
     );
 };
