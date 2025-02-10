@@ -26,14 +26,14 @@ app.post("/api/click", async (req, res) => {
 
     try {
         // Launch Puppeteer
-        const browser = await puppeteer.launch({ headless: false }); // headless: true for production
+        const browser = await puppeteer.launch({ headless: false }); //headless: true for production
         const page = await browser.newPage();
 
         // Navigate to the given URL
         console.log("Navigating to:", url);
         await page.goto(url, { 
             waitUntil: "networkidle2",
-            timeout: 120000 // 2 minutes
+            timeout: 120000 //2 minutes
         });
 
          // Fill in the login form
